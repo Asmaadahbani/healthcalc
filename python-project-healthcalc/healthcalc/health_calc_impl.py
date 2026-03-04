@@ -29,3 +29,71 @@ class HealthCalcImpl(HealthCalc):
             raise InvalidHealthDataException("Height must be within a possible biological range [0.30-3.00] m.")
             
         return weight / (height ** 2)
+    
+    def news2(frecResp: float, oxSat: float, oxSup: bool, preArtSis: float, frecCard: float, consciente: bool, temp: float):
+        news2 = 0
+        
+        # Frecuencia respiratoria
+        if (frecResp >= 25 or frecResp <= 8):
+            news2 = news2 + 3
+        elif (frecResp >= 21 or frecResp <= 24):
+            news2 = news2 + 2
+        elif (frecResp >= 9 or frecResp <= 11):
+            news2 = news2 + 1
+
+        # Saturacion de oxigeno
+        if (oxSat <= 91):
+            news2 = news2 + 3
+        elif (oxSat <= 93):
+            news2 = news2 + 2
+        elif (oxSat <= 95):
+            news2 = news2 + 1
+
+        # Oxigeno suplementario
+        if (oxSup == True):
+            news2 = news2 + 2
+
+        # Presion arterial sistolica
+        if (preArtSis <= 90 or preArtSis >= 220):
+            news2 = news2 + 3
+        elif (preArtSis <= 100):
+            news2 = news2 + 2
+        elif (preArtSis <= 110):
+            news2 = news2 + 1
+
+        # Frecuencia cardiaca
+        if (frecCard <= 40 or frecCard >= 131):
+            news2 = news2 + 3
+        elif (frecCard >= 111):
+            news2 = news2 + 2
+        elif (frecCard <= 50 or frecCard >= 91):
+            news2 = news2 + 1
+
+        # Nivel de consciencia
+        if (consciente == False):
+            news2 = news2 + 3
+
+        # Temperatura
+        if (temp <= 35):
+            news2 = news2 + 3
+        elif (frecCard > 39):
+            news2 = news2 + 2
+        elif (frecCard <= 36 or frecCard > 38):
+            news2 = news2 + 1
+
+        if frecResp <= 0:
+            raise InvalidHealthDataException("Respiratory rate must be positive.")
+        if oxSat <= 0:
+            raise InvalidHealthDataException("Oxigen saturation rate must be positive.")
+        if preArtSis <= 0:
+            raise InvalidHealthDataException("Systolic blood pressure must be positive.")
+        if frecCard <= 0:
+            raise InvalidHealthDataException("Heart rate rate must be positive.") # vv
+        
+        if news2 >= 5:
+            result = "Red alert: score of " + news2
+        else:
+            result = news2
+        
+        return result
+    

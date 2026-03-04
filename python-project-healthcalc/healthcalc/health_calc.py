@@ -25,3 +25,19 @@ class HealthCalc(ABC):
         :raises InvalidHealthDataException: If data is out of range
         """
         pass
+
+    @abstractmethod
+    def news2(frecResp: float, oxSat: float, oxSup: bool, preArtSis: float, frecCard: float, consciente: bool, temp: float):
+        """Calculate NEWS" score.
+        
+        :param frecResp: Respiratory rate (per minute)
+        :param oxSat: Oxigen saturation (%)
+        :param oxSup: Oxigen support (True/False)
+        :param preArtSis: Systolic blood pressure (mmHg)
+        :param frecCard: Heart rate (per minute)
+        :param consciente: Concience level (True/False)
+        :param temp: Temperature (ºC)
+        :return: NEWS2 score
+        :raises InvalidHealthDataException: If data is out of range
+        """
+        pass
